@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Link } from 'react-router-dom';
+import * as firebase from 'firebase';
+import RoomList from './components/RoomList';
+
+  var config = {
+    apiKey: "AIzaSyAsclpC26IJN4gxkeawKcuTXCGAIysyuEQ",
+    authDomain: "rooms-5d078.firebaseapp.com",
+    databaseURL: "https://rooms-5d078.firebaseio.com",
+    projectId: "rooms-5d078",
+    storageBucket: "rooms-5d078.appspot.com",
+    messagingSenderId: "948965291973"
+  };
+  firebase.initializeApp(config);
+
 
 class App extends Component {
+    
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+        <header>
+            <nav>
+                <Link to='/'>RoomList</Link>
+            </nav>
         </header>
+        
+        <main>
+            <Route exact path="/" component={RoomList} />
+        </main>
+        <RoomList firebase={firebase}/>
+            
       </div>
     );
   }
