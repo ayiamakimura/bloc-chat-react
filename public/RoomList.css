@@ -1,0 +1,8 @@
+h2 {
+    color: grey;
+    text-align: left;
+    text-transform: uppercase;
+    padding-left: 1rem;
+    background-color: gainsboro;
+    margin: 0;
+}

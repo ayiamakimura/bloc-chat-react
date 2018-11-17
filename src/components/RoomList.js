@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 class RoomList extends Component {
     constructor(props) {
-        super(props);
+       super(props);
         this.state = 
             { rooms: [] 
             };
@@ -15,8 +15,9 @@ class RoomList extends Component {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
-            this.setState({ rooms: this.state.rooms.concat( room ) });
-        });
+            this.setState({ rooms: this.state.rooms.concat( snapshot.val() ) });
+            this.setState({ rooms: this.state.rooms.concat( room ) })
+     });
     }
     
     createRoom(e) {
@@ -33,11 +34,18 @@ class RoomList extends Component {
     render() {
         return ( 
             <section>
-            Hello there
-        </section>
+                {
+                    this.state.rooms.map( (room) =>
+                        <h2 className='roomlist' key={room.key}>
+                        {room.name}
+                        </h2>
+                    )
+                }
+            </section>
 
         );
     }
 }
+
 
 export default RoomList;

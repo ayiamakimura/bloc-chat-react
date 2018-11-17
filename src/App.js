@@ -22,13 +22,10 @@ class App extends Component {
       <div className="App">
         <header>
             <nav>
-                <Link to='/'>RoomList</Link>
+                <Link to='/' className='Linkroomlist'>RoomList</Link>
             </nav>
         </header>
-        
-        <main>
-            <Route exact path="/" component={RoomList} />
-        </main>
+        <h1>Bloc Chat</h1>
         <RoomList firebase={firebase}/>
             
       </div>
