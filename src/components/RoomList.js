@@ -6,30 +6,36 @@ class RoomList extends Component {
     constructor(props) {
        super(props);
         this.state = 
-            { rooms: [] 
+            { rooms: []
             };
         this.roomsRef = this.props.firebase.database().ref('rooms');
+        this.handleChange = this.handleChange.bind(this);
+        this.createRoom = this.createRoom.bind(this);
+
     }
     
     componentDidMount() {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
-            this.setState({ rooms: this.state.rooms.concat( snapshot.val() ) });
-            this.setState({ rooms: this.state.rooms.concat( room ) })
-     });
+            this.setState({ rooms: this.state.rooms.concat( room) });
+        })
     }
     
     createRoom(e) {
         e.preventDefault();
-        if (this.state.newRoomName.length > 3) {
-            this.roomsRef.push({ name: this.state.newRoomName });
-        } else {
-            alert('Room name must contain at least 3 characters.')
-        }
-        this.setState({ newRoomName: '' })
-    } 
+        this.roomsRef.push({ name: this.state.name });
+        this.setState({ name: "" });
+    }
     
+    handleChange(e) {
+        this.setState({
+            name: e.target.value
+        });
+    }
+    
+
+
     
     render() {
         return ( 
@@ -41,6 +47,17 @@ class RoomList extends Component {
                         </h2>
                     )
                 }
+                <div>
+                    <h3>Create new room</h3>
+                        <form onSubmit={this.createRoom}>
+                            <label>
+                                Enter your room name:
+                                <input type="text" value={this.state.name} onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Cancel" />
+                            <input type="submit" value="Create room"  />
+                        </form>
+                </div>
             </section>
 
         );
