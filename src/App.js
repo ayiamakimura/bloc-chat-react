@@ -29,24 +29,18 @@ class App extends Component {
     }
 
   render() {
-    return (
-      <div className="App">
-        <header>
-            <nav>
-                <Link to='/' className='Linkroomlist'>RoomList</Link>
-                <Route path="/messagelist" component={MessageList} />
-            </nav>
-        </header>
-        <h1>Bloc Chat</h1>
-<<<<<<< HEAD
-        < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
-        < MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
-=======
-        <RoomList firebase={firebase}/>
-        <MessageList firebase={firebase}/>
->>>>>>> checkpoint-4-ListMessages
-            
-      </div>
+      return (
+          <div className="App">
+            <header className="App-header">
+          <h1 className="App-title">Welcome to React</h1>
+          </header>
+          <p className="App-intro">
+          </p>
+          <main>
+          </main>
+          < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
+< MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+    </div>
     );
   }
 }
