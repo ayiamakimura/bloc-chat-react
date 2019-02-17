@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 
   var config = {
     apiKey: "AIzaSyAsclpC26IJN4gxkeawKcuTXCGAIysyuEQ",
@@ -23,10 +24,12 @@ class App extends Component {
         <header>
             <nav>
                 <Link to='/' className='Linkroomlist'>RoomList</Link>
+                <Route path="/messagelist" component={MessageList} />
             </nav>
         </header>
         <h1>Bloc Chat</h1>
         <RoomList firebase={firebase}/>
+        <MessageList firebase={firebase}/>
             
       </div>
     );
