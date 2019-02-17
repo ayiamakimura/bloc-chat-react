@@ -3,6 +3,7 @@ import { Route, Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
+import User from './components/User';
 
   var config = {
     apiKey: "AIzaSyAsclpC26IJN4gxkeawKcuTXCGAIysyuEQ",
@@ -27,7 +28,12 @@ class App extends Component {
         this.setState({ activeRoom: room });
         console.log(room);
     }
-
+    
+    setUser(user) {
+        this.setState({ user: user });
+        if (user !== null) {console.log(user.displayName)};
+    }
+    
   render() {
       return (
           <div className="App">
@@ -38,8 +44,10 @@ class App extends Component {
           </p>
           <main>
           </main>
+          < User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
           < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
-< MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+              < MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+                
     </div>
     );
   }
