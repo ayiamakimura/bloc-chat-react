@@ -34,11 +34,17 @@ class App extends Component {
         <header>
             <nav>
                 <Link to='/' className='Linkroomlist'>RoomList</Link>
+                <Route path="/messagelist" component={MessageList} />
             </nav>
         </header>
         <h1>Bloc Chat</h1>
+<<<<<<< HEAD
         < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
         < MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+=======
+        <RoomList firebase={firebase}/>
+        <MessageList firebase={firebase}/>
+>>>>>>> checkpoint-4-ListMessages
             
       </div>
     );
