@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 
   var config = {
     apiKey: "AIzaSyAsclpC26IJN4gxkeawKcuTXCGAIysyuEQ",
@@ -16,6 +17,16 @@ import RoomList from './components/RoomList';
 
 class App extends Component {
     
+    constructor(props) {
+        super(props);
+        this.state = { activeRoom: '' };
+        this.activateRoom = this.activateRoom.bind(this);
+    }
+    
+    activateRoom(room) {
+        this.setState({ activeRoom: room });
+        console.log(room);
+    }
 
   render() {
     return (
@@ -26,7 +37,8 @@ class App extends Component {
             </nav>
         </header>
         <h1>Bloc Chat</h1>
-        <RoomList firebase={firebase}/>
+        < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
+        < MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
             
       </div>
     );
