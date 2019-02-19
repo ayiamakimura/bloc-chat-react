@@ -34,23 +34,20 @@ class App extends Component {
         if (user !== null) {console.log(user.displayName)};
     }
     
-  render() {
-      return (
-          <div className="App">
-            <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-          </header>
-          <p className="App-intro">
-          </p>
-          <main>
-          </main>
-          < User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
-          < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
-              < MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
-                
-    </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <h1 className="App-title">Welcome to React</h1>
+                </header>
+                <p className="App-intro"></p>
+                <main></main>
+                < User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
+                < RoomList firebase={firebase} activeRoom={this.state.activeRoom} activateRoom={this.activateRoom.bind(this)}/>
+                < MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+            </div>
+        );
+    }
 }
 
 export default App;
