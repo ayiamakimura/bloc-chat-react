@@ -8,13 +8,11 @@ class MessageList extends Component {
     this.state = {
       messages: [],
       currentRoomMessages: [],
-      currentUserName: '',
       newMessageContent: '',
-      currentTime: '',
-      currentRoom: ''
     };
     this.messagesRef = this.props.firebase.database().ref('messages');
     this.createMessage = this.createMessage.bind(this);
+    this.handleContentChange = this.handleContentChange.bind(this);
     this.filterAndDisplayMessages = this.filterAndDisplayMessages.bind(this);
   }
 
@@ -32,16 +30,21 @@ class MessageList extends Component {
     }
   }
 
-  createMessage(event) {
-    event.preventDefault();
+  createMessage(newMessageContent) {
+    if (!this.props.activeRoom || !this.props.user) {return};
     this.messagesRef.push({
-      username: this.state.currentUserName,
+      username: this.props.user.displayName,
       content: this.state.newMessageContent,
-      sentAt: this.state.currentTime,
-      roomId: this.state.currentRoom
+      sentAt: this.aprops.firebase.database.ServerValue.TIMESTAMP,
+      roomId: this.props.activeRoom.key
     });
-    this.setState({ newMessageContent: '' })
+    this.setState({ newMessageContent: '' });
   }
+    
+    handleContentChange(event) {
+        event.preventDefault();
+        this.setState({newMessageContent: event.target.value});
+    }
 
 
   filterAndDisplayMessages(activeRoom) {
@@ -51,6 +54,10 @@ class MessageList extends Component {
   render() {
     return (
       <div className="messages">
+        <form className="create-message" onSubmit={() => this.createMessage(this.state.newMessageContent)}>
+            <input type="text" value={this.state.newMessageContent} onChange={this.handleContentChange}/>
+            <button type="submit">Create Message</button>
+        </form>
         <h2>Messages</h2>
         <div className="messages-list">
           {this.state.currentRoomMessages.map(message =>
@@ -64,9 +71,6 @@ class MessageList extends Component {
     );
   }
 }
-
-
-
 
 
 export default MessageList;
